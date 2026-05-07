@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react';
 const LoadingState = () => {
   const [step, setStep] = useState(0);
   const steps = [
-    "Extracting claims...",
-    "Searching trusted sources...",
-    "Comparing evidence...",
-    "Generating verdict..."
+    "Searching live web sources...",
+    "Retrieving trusted evidence...",
+    "Generating semantic embeddings...",
+    "Analyzing similarity with FAISS...",
+    "Ollama reasoning in progress...",
+    "Generating final verdict..."
   ];
 
   useEffect(() => {
