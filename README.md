@@ -67,4 +67,4 @@ fake_news_frontend/     # Next.js UI components and API integration
 
 ---
 
-**finally built by bhanu 🤎**
+**built by bhanu 🤎**
