@@ -20,7 +20,9 @@ class VectorStore:
         query_embedding = np.array([query_embedding]).astype('float32')
         distances, indices = self.index.search(query_embedding, k)
         results = []
-        for idx in indices[0]:
+        for i, idx in enumerate(indices[0]):
             if idx in self.data_map:
-                results.append(self.data_map[idx])
+                item = self.data_map[idx].copy()
+                item['distance'] = float(distances[0][i])
+                results.append(item)
         return results
