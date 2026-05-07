@@ -11,6 +11,9 @@ const SourceCard = ({ source }) => {
     }}>
       <div>
         <div style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{source.title}</div>
+        <div style={{ fontSize: '0.85rem', color: '#888', margin: '5px 0', fontStyle: 'italic' }}>
+          "{source.summary}"
+        </div>
         <a href={source.url} target="_blank" rel="noopener noreferrer" style={{
           color: 'var(--secondary)',
           fontSize: '0.9rem',
