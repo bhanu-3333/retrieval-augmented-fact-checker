@@ -2,6 +2,19 @@ import React from 'react';
 import ConfidenceMeter from './ConfidenceMeter';
 
 const ResultCard = ({ result }) => {
+  const [displayedText, setDisplayedText] = React.useState('');
+  
+  React.useEffect(() => {
+    let index = 0;
+    setDisplayedText('');
+    const timer = setInterval(() => {
+      setDisplayedText((prev) => prev + result.explanation.charAt(index));
+      index++;
+      if (index >= result.explanation.length) clearInterval(timer);
+    }, 20);
+    return () => clearInterval(timer);
+  }, [result.explanation]);
+
   const getVerdictColor = (verdict) => {
     switch (verdict.toLowerCase()) {
       case 'real': return 'var(--real-color)';
@@ -28,7 +41,7 @@ const ResultCard = ({ result }) => {
 
       <div style={{ marginBottom: '20px' }}>
         <h3 style={{ fontSize: '1.2rem', color: '#aaa', marginBottom: '10px' }}>Explanation:</h3>
-        <p style={{ lineHeight: '1.6', fontSize: '1.1rem' }}>{result.explanation}</p>
+        <p style={{ lineHeight: '1.6', fontSize: '1.1rem', minHeight: '80px' }}>{displayedText}</p>
       </div>
 
       <div>
