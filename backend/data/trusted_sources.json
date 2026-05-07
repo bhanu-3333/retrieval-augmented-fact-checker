@@ -4,27 +4,63 @@
     "verdict": "Fake",
     "evidence": "NPCI has actually expanded UPI to multiple countries like Singapore, UAE, and Mauritius. No ban has been announced.",
     "source_title": "NPCI Official Statement",
-    "url": "https://www.npci.org.in"
+    "url": "https://www.npci.org.in",
+    "trust_score": 98
   },
   {
     "claim": "NASA discovered a parallel universe where time runs backwards.",
     "verdict": "Misleading",
     "evidence": "NASA researchers found evidence of high-energy particles in Antarctica that could be explained by various theories, but a parallel universe was just one speculative hypothesis, not a confirmed discovery.",
     "source_title": "NASA Science",
-    "url": "https://science.nasa.gov"
+    "url": "https://science.nasa.gov",
+    "trust_score": 95
   },
   {
-    "claim": "WHO declared a new global health emergency for X virus.",
+    "claim": "WHO declared a new global health emergency for Monkeypox virus.",
     "verdict": "Real",
-    "evidence": "The WHO did announce a Public Health Emergency of International Concern (PHEIC) regarding the recent outbreak of the specified virus.",
+    "evidence": "The World Health Organization (WHO) declared the upsurge of mpox in the Democratic Republic of the Congo and other countries a public health emergency of international concern (PHEIC).",
     "source_title": "World Health Organization",
-    "url": "https://www.who.int"
+    "url": "https://www.who.int",
+    "trust_score": 99
   },
   {
     "claim": "Drinking lemon water cures COVID-19.",
     "verdict": "Fake",
     "evidence": "There is no scientific evidence that lemon water or any specific food can cure COVID-19. Vaccines and medical treatments are the only proven methods.",
     "source_title": "Alt News Fact Check",
-    "url": "https://www.altnews.in"
+    "url": "https://www.altnews.in",
+    "trust_score": 92
+  },
+  {
+    "claim": "The Indian government is providing free recharge for 3 months to all citizens.",
+    "verdict": "Fake",
+    "evidence": "This is a widespread scam message. The government has not announced any such scheme. Such links are often phishing attempts to steal personal data.",
+    "source_title": "PIB Fact Check",
+    "url": "https://factcheck.pib.gov.in",
+    "trust_score": 97
+  },
+  {
+    "claim": "Eating garlic can prevent infection with the new coronavirus.",
+    "verdict": "Fake",
+    "evidence": "Garlic is a healthy food that may have some antimicrobial properties. However, there is no evidence from the current outbreak that eating garlic has protected people from the new coronavirus.",
+    "source_title": "WHO Myth Busters",
+    "url": "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/myth-busters",
+    "trust_score": 99
+  },
+  {
+    "claim": "5G mobile networks spread COVID-19.",
+    "verdict": "Fake",
+    "evidence": "Viruses cannot travel on radio waves/mobile networks. COVID-19 is spreading in many countries that do not have 5G mobile networks.",
+    "source_title": "Full Fact",
+    "url": "https://fullfact.org/health/5g-coronavirus-conspiracy-theories-explained/",
+    "trust_score": 94
+  },
+  {
+    "claim": "The moon is made of green cheese.",
+    "verdict": "Fake",
+    "evidence": "The moon is composed of silicate rock and various minerals, as confirmed by geological samples brought back by Apollo missions.",
+    "source_title": "NASA Solar System Exploration",
+    "url": "https://solarsystem.nasa.gov/moons/earths-moon/overview/",
+    "trust_score": 99
   }
 ]
