@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "India banned UPI payments for international transactions.",
+    "verdict": "Fake",
+    "evidence": "NPCI has actually expanded UPI to multiple countries like Singapore, UAE, and Mauritius. No ban has been announced.",
+    "source_title": "NPCI Official Statement",
+    "url": "https://www.npci.org.in"
+  },
+  {
+    "claim": "NASA discovered a parallel universe where time runs backwards.",
+    "verdict": "Misleading",
+    "evidence": "NASA researchers found evidence of high-energy particles in Antarctica that could be explained by various theories, but a parallel universe was just one speculative hypothesis, not a confirmed discovery.",
+    "source_title": "NASA Science",
+    "url": "https://science.nasa.gov"
+  },
+  {
+    "claim": "WHO declared a new global health emergency for X virus.",
+    "verdict": "Real",
+    "evidence": "The WHO did announce a Public Health Emergency of International Concern (PHEIC) regarding the recent outbreak of the specified virus.",
+    "source_title": "World Health Organization",
+    "url": "https://www.who.int"
+  },
+  {
+    "claim": "Drinking lemon water cures COVID-19.",
+    "verdict": "Fake",
+    "evidence": "There is no scientific evidence that lemon water or any specific food can cure COVID-19. Vaccines and medical treatments are the only proven methods.",
+    "source_title": "Alt News Fact Check",
+    "url": "https://www.altnews.in"
+  }
+]
