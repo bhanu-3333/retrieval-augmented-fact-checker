@@ -24,7 +24,7 @@ class Retriever:
             
         self.vector_store.add_texts(claims, embeddings, data)
 
-    def retrieve(self, query, k=2):
+    def retrieve(self, query, k=5):
         if self.vector_store is None:
             return []
         query_embedding = self.embedder.get_embeddings([query])[0]
