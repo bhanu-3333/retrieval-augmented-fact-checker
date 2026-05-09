@@ -4,19 +4,49 @@ const Hero = () => {
   return (
     <header style={{
       textAlign: 'center',
-      padding: '120px 20px 40px',
-      maxWidth: '800px',
-      margin: '0 auto'
+      padding: '120px 20px 60px',
+      maxWidth: '900px',
+      margin: '0 auto',
+      position: 'relative'
     }}>
-      <h1 style={{ fontSize: '3.5rem', marginBottom: '20px', lineHeight: '1.2' }}>
-        AI-Powered <span className="gradient-text">Fake News</span> Detection
+      <div style={{
+        display: 'inline-block',
+        background: 'rgba(99, 102, 241, 0.1)',
+        padding: '6px 16px',
+        borderRadius: '30px',
+        border: '1px solid rgba(99, 102, 241, 0.3)',
+        color: 'var(--primary)',
+        fontSize: '0.85rem',
+        fontWeight: '600',
+        marginBottom: '24px',
+        textTransform: 'uppercase',
+        letterSpacing: '1px'
+      }}>
+        Next-Gen Verification
+      </div>
+      <h1 style={{ 
+        fontSize: 'clamp(2.5rem, 8vw, 4.5rem)', 
+        marginBottom: '24px', 
+        lineHeight: '1.1',
+        fontWeight: '800',
+        letterSpacing: '-1px'
+      }}>
+        Verify Truth with <br />
+        <span className="gradient-text">FakeScan AI</span>
       </h1>
-      <p style={{ color: '#aaa', fontSize: '1.2rem', lineHeight: '1.6' }}>
-        Unmask misinformation with our advanced RAG-based verification system. 
-        Analyze claims against trusted evidence sources in real-time.
+      <p style={{ 
+        color: 'rgba(255, 255, 255, 0.6)', 
+        fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', 
+        lineHeight: '1.7',
+        maxWidth: '650px',
+        margin: '0 auto'
+      }}>
+        The world's most advanced RAG-powered fact-checker. 
+        Detect misinformation, hoaxes, and AI-generated fabrications in seconds.
       </p>
     </header>
   );
 };
 
 export default Hero;
+
