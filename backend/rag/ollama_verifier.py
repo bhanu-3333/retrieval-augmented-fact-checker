@@ -39,80 +39,99 @@ class OllamaVerifier:
         # 2. Prepare context for Ollama
         evidence_context = ""
         for i, r in enumerate(results):
-            evidence_context += f"--- SOURCE {i+1}: {r['metadata']['title']} ---\n"
-            evidence_context += f"URL: {r['metadata']['url']}\n"
-            evidence_context += f"CONTENT: {r['metadata']['content']}\n\n"
+            evidence_context += f"--- SOURCE {i+1}: {r['metadata'].get('title', 'Unknown Title')} ---\n"
+            evidence_context += f"URL: {r['metadata'].get('url', 'N/A')}\n"
+            evidence_context += f"CONTENT: {r['metadata'].get('content', '')}\n\n"
         
         prompt = f"""
-        You are an elite AI fact-checker with the reasoning capabilities of Perplexity AI. 
-        Your task is to verify the following claim using the provided live search results.
+        You are a professional fact-checker. Verify the claim below using the provided search results.
         
         CLAIM: {text}
         
-        RETRIEVED EVIDENCE:
+        EVIDENCE:
         {evidence_context}
         
-        STRICT ANALYSIS GUIDELINES:
-        1. CROSS-REFERENCE: Compare multiple sources. If sources contradict each other, highlight it.
-        2. VERDICT DEFINITIONS:
-           - 'Real': Multiple trusted sources explicitly confirm the claim.
-           - 'Fake': Multiple trusted sources explicitly debunk the claim, or it's a known hoax.
-           - 'Misleading': The claim contains elements of truth but is presented out of context or exaggerated.
-           - 'Unverified': No definitive evidence found in the provided snippets.
-        3. SOURCE RELIABILITY: Prioritize Reuters, AP, BBC, Snopes, and government domains.
-        4. REASONING: Explain your logical path. If it's a known rumor, mention that.
-        5. DYNAMIC CONFIDENCE:
-           - 90-100%: Direct confirmation/debunking from multiple top-tier sources.
-           - 70-89%: Strong evidence but maybe from fewer sources.
-           - 40-69%: Mixed evidence or less authoritative sources.
-           - 0-39%: Very weak or no evidence.
+        TASK:
+        1. Compare the claim against the evidence. 
+        2. Detect any direct contradictions. If the evidence says "X is false" and the claim is "X", mark as 'Fake'.
+        3. If multiple reliable sources confirm the claim, mark as 'Real'.
+        4. If the claim is partially true but missing context, mark as 'Misleading'.
+        5. Formulate a detailed explanation citing specific sources.
         
-        OUTPUT FORMAT (JSON ONLY - No other text):
+        RULES:
+        - Output MUST be valid JSON.
+        - Do not use "Unverified" if there is clear evidence for or against.
+        - If the evidence is inconclusive, then use "Unverified".
+        - Confidence should reflect the strength and number of sources.
+        
+        RESPONSE FORMAT:
         {{
-            "verdict": "Real/Fake/Misleading/Unverified",
-            "confidence": <integer 0-100>,
-            "explanation": "<detailed reasoning including specific source names>",
-            "highlighted_claims": ["specific parts of the claim that are confirmed/debunked"]
+            "verdict": "Real" | "Fake" | "Misleading" | "Unverified",
+            "confidence": <0-100>,
+            "explanation": "<detailed reasoning citing sources>",
+            "highlighted_claims": ["segments of the original claim that were verified or debunked"]
         }}
         """
         
-        print(f"Calling Ollama ({self.model}) for advanced reasoning...")
+        print(f"Calling Ollama ({self.model}) at {self.ollama_url}...")
         try:
+            # Check if URL already has the endpoint, if not append it
+            target_url = self.ollama_url
+            if not target_url.endswith("/api/generate") and not target_url.endswith("/api/chat"):
+                target_url = target_url.rstrip("/") + "/api/generate"
+
             response = requests.post(
-                self.ollama_url,
+                target_url,
                 json={
                     "model": self.model,
                     "prompt": prompt,
                     "stream": False,
                     "format": "json"
                 },
-                timeout=60 # Increased timeout for reasoning
+                timeout=90
             )
             response.raise_for_status()
-            ai_response = response.json().get('response', '')
-            data = json.loads(ai_response)
+            ai_data = response.json()
+            
+            # Ollama returns the generated text in the 'response' field
+            raw_content = ai_data.get('response', '{}')
+            data = json.loads(raw_content)
+            
         except Exception as e:
-            print(f"Ollama error: {e}")
-            # Fallback reasoning if Ollama fails (basic keyword check)
+            print(f"Ollama integration error: {e}")
+            # Intelligent fallback: If we have results but Ollama failed, do a basic check
+            has_debunk_keywords = any(k in evidence_context.lower() for k in ["fake", "hoax", "false", "debunked", "misleading"])
+            has_confirm_keywords = any(k in evidence_context.lower() for k in ["confirmed", "true", "accurate", "verified by"])
+            
+            if has_debunk_keywords and not has_confirm_keywords:
+                verdict, conf, expl = "Fake", 60, "Automatic detection found debunking keywords in retrieved sources, but AI reasoning failed."
+            elif has_confirm_keywords and not has_debunk_keywords:
+                verdict, conf, expl = "Real", 60, "Automatic detection found confirmation keywords in retrieved sources, but AI reasoning failed."
+            else:
+                verdict, conf, expl = "Unverified", 20, f"AI reasoning engine failed ({str(e)}). Evidence was found but could not be definitively analyzed."
+
             data = {
-                "verdict": "Unverified",
-                "confidence": 20,
-                "explanation": f"The AI reasoning engine encountered an error ({str(e)}). Analysis is based on raw search relevance only.",
+                "verdict": verdict,
+                "confidence": conf,
+                "explanation": expl,
                 "highlighted_claims": [text]
             }
 
         # 3. Format final response
         processed_sources = []
         for r in results:
-            # Simple trust score heuristic
-            domain = r['metadata']['url'].split('/')[2]
+            domain = "unknown"
+            url = r['metadata'].get('url', '')
+            if url and '//' in url:
+                domain = url.split('/')[2]
+            
             trusted_domains = ["reuters.com", "apnews.com", "bbc.com", "snopes.com", "factcheck.org", "gov", "org", "edu"]
             trust_score = 95 if any(td in domain for td in trusted_domains) else 75
             
             processed_sources.append({
-                "title": r['metadata']['title'],
-                "url": r['metadata']['url'],
-                "summary": r['metadata']['content'][:250] + "...",
+                "title": r['metadata'].get('title', 'Source'),
+                "url": url,
+                "summary": r['metadata'].get('content', '')[:300] + "...",
                 "trust_score": trust_score
             })
 
@@ -123,3 +142,4 @@ class OllamaVerifier:
             "sources": processed_sources,
             "highlighted_claims": data.get("highlighted_claims", [text])
         }
+
