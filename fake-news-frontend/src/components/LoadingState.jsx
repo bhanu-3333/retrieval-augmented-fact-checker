@@ -55,7 +55,7 @@ const LoadingState = () => {
         <div style={{ 
           width: `${((step + 1) / steps.length) * 100}%`, 
           height: '100%', 
-          background: 'linear-gradient(90deg, var(--primary), var(--secondary))',
+          background: 'linear-gradient(90deg, #ffffff, #52525b)',
           transition: 'width 0.5s ease'
         }} />
       </div>
