@@ -11,10 +11,10 @@ const Hero = () => {
     }}>
       <div style={{
         display: 'inline-block',
-        background: 'rgba(99, 102, 241, 0.1)',
+        background: 'rgba(255, 255, 255, 0.05)',
         padding: '6px 16px',
         borderRadius: '30px',
-        border: '1px solid rgba(99, 102, 241, 0.3)',
+        border: '1px solid rgba(255, 255, 255, 0.15)',
         color: 'var(--primary)',
         fontSize: '0.85rem',
         fontWeight: '600',
