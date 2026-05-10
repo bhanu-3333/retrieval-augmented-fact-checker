@@ -18,7 +18,7 @@ const ConfidenceMeter = ({ score, color }) => {
         <div style={{
           width: '74px',
           height: '74px',
-          background: '#0a0a0f',
+          background: '#000000',
           borderRadius: '50%',
           display: 'flex',
           flexDirection: 'column',
