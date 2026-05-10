@@ -11,6 +11,7 @@ class OllamaVerifier:
         self.ollama_url = os.getenv("OLLAMA_URL", "http://127.0.0.1:11434/api/generate")
         self.model = os.getenv("OLLAMA_MODEL", "mistral:latest")
 
+
     def verify(self, text):
         # 1. Retrieve evidence from Tavily (Live Web)
         print(f"Analyzing claim: {text}")
