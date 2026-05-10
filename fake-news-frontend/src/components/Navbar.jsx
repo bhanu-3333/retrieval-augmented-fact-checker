@@ -11,7 +11,7 @@ const Navbar = () => {
       top: 0,
       width: '100%',
       zIndex: 1000,
-      background: 'rgba(10, 10, 12, 0.8)',
+      background: 'rgba(0, 0, 0, 0.8)',
       backdropFilter: 'blur(10px)'
     }}>
       <div style={{ fontSize: '24px', fontWeight: 'bold', letterSpacing: '1px' }}>
