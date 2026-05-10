@@ -49,14 +49,14 @@ const SourceCard = ({ source }) => {
         </div>
         
         <div style={{
-          background: isHighTrust ? 'rgba(16, 185, 129, 0.1)' : 'rgba(6, 182, 212, 0.1)',
-          color: isHighTrust ? 'var(--real)' : 'var(--secondary)',
+          background: isHighTrust ? 'rgba(255, 255, 255, 0.1)' : 'rgba(161, 161, 170, 0.05)',
+          color: isHighTrust ? '#ffffff' : '#a1a1aa',
           padding: '6px 14px',
           borderRadius: '10px',
           fontSize: '0.75rem',
           fontWeight: '800',
           letterSpacing: '1px',
-          border: `1px solid ${isHighTrust ? 'rgba(16, 185, 129, 0.3)' : 'rgba(6, 182, 212, 0.3)'}`,
+          border: `1px solid ${isHighTrust ? 'rgba(255, 255, 255, 0.3)' : 'rgba(161, 161, 170, 0.2)'}`,
           whiteSpace: 'nowrap'
         }}>
           {isHighTrust ? 'VERIFIED SOURCE' : 'TRUSTED SOURCE'} {source.trust_score}%
@@ -70,7 +70,7 @@ const SourceCard = ({ source }) => {
         padding: '16px',
         background: 'rgba(0, 0, 0, 0.2)',
         borderRadius: '12px',
-        borderLeft: `2px solid ${isHighTrust ? 'var(--real)' : 'var(--secondary)'}`
+        borderLeft: `2px solid ${isHighTrust ? '#ffffff' : '#52525b'}`
       }}>
         {source.summary}
       </div>
