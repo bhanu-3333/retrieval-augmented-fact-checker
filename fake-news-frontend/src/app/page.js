@@ -47,8 +47,8 @@ export default function Home() {
             textAlign: 'center',
             maxWidth: '850px',
             margin: '40px auto',
-            border: '1px solid rgba(244, 63, 94, 0.3)',
-            background: 'rgba(244, 63, 94, 0.05)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            background: 'rgba(255, 255, 255, 0.05)',
             fontWeight: '600'
           }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: '10px' }}>
