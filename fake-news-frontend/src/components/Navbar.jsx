@@ -31,23 +31,8 @@ const Navbar = () => {
         <div style={{ 
           fontSize: '20px', 
           fontWeight: '700', 
-          letterSpacing: '-0.02em',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '10px'
+          letterSpacing: '-0.02em'
         }}>
-          <div style={{ 
-            width: '28px', 
-            height: '28px', 
-            background: 'var(--foreground)', 
-            borderRadius: '4px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'var(--background)',
-            fontSize: '14px',
-            fontWeight: '800'
-          }}>F</div>
           <span style={{ opacity: 0.9 }}>FAKESCAN AI</span>
         </div>
       </Link>
