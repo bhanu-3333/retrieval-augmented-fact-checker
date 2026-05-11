@@ -1,73 +1,94 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 
 const LoadingState = () => {
   const [step, setStep] = useState(0);
   const steps = [
-    "Searching live web sources...",
-    "Retrieving trusted evidence...",
-    "Generating semantic embeddings...",
-    "Analyzing similarity with FAISS...",
-    "Ollama reasoning in progress...",
-    "Detecting contradictions...",
-    "Generating final verdict..."
+    "Initializing neural handshake...",
+    "Querying global news clusters...",
+    "Retrieving verification snippets...",
+    "Synthesizing RAG evidence...",
+    "Executing semantic reasoning...",
+    "Detecting contradictory patterns...",
+    "Generating final intelligence report..."
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setStep((prev) => (prev < steps.length - 1 ? prev + 1 : prev));
-    }, 2500);
+    }, 2000);
     return () => clearInterval(interval);
   }, [steps.length]);
 
   return (
-    <div style={{ textAlign: 'center', padding: '60px 20px', maxWidth: '600px', margin: '0 auto' }}>
-      <div className="ai-thinking-container" style={{ position: 'relative', marginBottom: '40px' }}>
-        <div className="pulse" style={{
-          width: '80px',
-          height: '80px',
-          border: '4px solid var(--primary)',
+    <div style={{ textAlign: 'center', padding: '80px 20px', maxWidth: '700px', margin: '0 auto' }}>
+      <div style={{ position: 'relative', marginBottom: '60px' }}>
+        <div style={{
+          width: '100px',
+          height: '100px',
+          border: '1px solid rgba(0,0,0,0.05)',
           borderRadius: '50%',
           margin: '0 auto',
-          borderTopColor: 'transparent',
-          animation: 'spin 1s linear infinite'
-        }} />
-        <div style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          fontSize: '1.5rem'
-        }}>🧠</div>
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'var(--accent-muted)'
+        }}>
+          <div style={{
+            width: '60px',
+            height: '60px',
+            border: '2px solid var(--accent-purple)',
+            borderRadius: '50%',
+            borderTopColor: 'transparent',
+            animation: 'spin 1.5s linear infinite'
+          }} />
+        </div>
       </div>
       
-      <div style={{ fontSize: '1.4rem', color: '#fff', marginBottom: '20px', fontWeight: '500' }}>
+      <div style={{ 
+        fontFamily: 'inherit',
+        fontSize: '1.2rem', 
+        color: 'var(--foreground)', 
+        marginBottom: '24px', 
+        fontWeight: '600',
+        letterSpacing: '-0.02em'
+      }}>
         {steps[step]}
       </div>
       
       <div style={{ 
         width: '100%', 
-        height: '6px', 
-        background: 'rgba(255,255,255,0.1)', 
+        height: '2px', 
+        background: 'rgba(0,0,0,0.05)', 
         borderRadius: '10px',
         overflow: 'hidden',
-        marginBottom: '10px'
+        marginBottom: '20px'
       }}>
         <div style={{ 
           width: `${((step + 1) / steps.length) * 100}%`, 
           height: '100%', 
-          background: 'linear-gradient(90deg, #ffffff, #52525b)',
-          transition: 'width 0.5s ease'
+          background: 'var(--foreground)',
+          transition: 'width 0.8s cubic-bezier(0.16, 1, 0.3, 1)'
         }} />
       </div>
       
-      <p style={{ color: '#666', fontSize: '0.9rem' }}>
-        Analyzing massive datasets and cross-referencing sources...
-      </p>
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        color: 'rgba(0,0,0,0.3)', 
+        fontSize: '0.7rem',
+        fontWeight: '700',
+        textTransform: 'uppercase',
+        letterSpacing: '0.1em'
+      }}>
+        <span>RAG_STATUS: ACTIVE</span>
+        <span>LATENCY: 124MS</span>
+      </div>
 
       <style jsx>{`
         @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
+          to { transform: rotate(360deg); }
         }
       `}</style>
     </div>
