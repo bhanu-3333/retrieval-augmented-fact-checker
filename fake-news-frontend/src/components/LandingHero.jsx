@@ -142,17 +142,58 @@ const LandingHero = () => {
         </div>
       </div>
 
-      <div style={{ 
-        position: 'absolute', 
-        bottom: '60px', 
-        left: '8%', 
-        display: 'flex', 
-        alignItems: 'center', 
-        gap: '20px',
-        opacity: 0.4 
+      {/* Infinite Marquee Scroller */}
+      <div style={{
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        overflow: 'hidden',
+        padding: '20px 0',
+        borderTop: '1px solid rgba(0,0,0,0.06)'
       }}>
-        <div style={{ width: '40px', height: '1px', background: 'var(--foreground)' }}></div>
-        <span style={{ fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.2em' }}>v4.0.2 / RAG ENGINE</span>
+        <div className="marquee-track">
+          <div className="marquee-content">
+            {['AI Verification', 'RAG Engine', 'Semantic Analysis', 'Neural Reasoning', 'Real-time Retrieval', 'Evidence Synthesis', 'Fact Checking', 'Source Intelligence', 'Misinformation Detection', 'Deep Learning'].map((item, i) => (
+              <span key={i} style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '24px',
+                marginRight: '60px',
+                fontSize: '0.8rem',
+                fontWeight: '700',
+                textTransform: 'uppercase',
+                letterSpacing: '0.15em',
+                color: 'var(--foreground)',
+                opacity: 0.5,
+                whiteSpace: 'nowrap'
+              }}>
+                {item}
+                <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--foreground)', opacity: 0.4, display: 'inline-block' }}></span>
+              </span>
+            ))}
+          </div>
+          <div className="marquee-content" aria-hidden="true">
+            {['AI Verification', 'RAG Engine', 'Semantic Analysis', 'Neural Reasoning', 'Real-time Retrieval', 'Evidence Synthesis', 'Fact Checking', 'Source Intelligence', 'Misinformation Detection', 'Deep Learning'].map((item, i) => (
+              <span key={i} style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '24px',
+                marginRight: '60px',
+                fontSize: '0.8rem',
+                fontWeight: '700',
+                textTransform: 'uppercase',
+                letterSpacing: '0.15em',
+                color: 'var(--foreground)',
+                opacity: 0.5,
+                whiteSpace: 'nowrap'
+              }}>
+                {item}
+                <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--foreground)', opacity: 0.4, display: 'inline-block' }}></span>
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
 
       <style jsx>{`
@@ -160,6 +201,22 @@ const LandingHero = () => {
           div[style*="flex: 0 0 400px"] {
             display: none !important;
           }
+        }
+        .marquee-track {
+          display: flex;
+          width: max-content;
+          animation: marquee 30s linear infinite;
+        }
+        .marquee-content {
+          display: flex;
+          flex-shrink: 0;
+        }
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .marquee-track:hover {
+          animation-play-state: paused;
         }
       `}</style>
     </section>
