@@ -4,6 +4,10 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import LandingHero from '../components/LandingHero';
 
+/**
+ * Home component serving as the landing page for FakeScan AI.
+ * Displays the navigation and the hero section with a premium aesthetic.
+ */
 export default function Home() {
   return (
     <main style={{ 
