@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 const Navbar = () => {
   const pathname = usePathname();
 
+  // Configuration for navigation links used in the header
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'Detect News', href: '/detect' },
