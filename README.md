@@ -1,5 +1,8 @@
 # 🛡️ FakeScan AI
-### *Advanced RAG-Powered Misinformation Detection Engine*
+### *Advanced Retrieval-Augmented Generation (RAG) Powered Misinformation Detection Engine*
+
+FakeScan AI is a sophisticated platform designed to combat digital misinformation through real-time verification and deep semantic reasoning.
+
 
 ---
 
