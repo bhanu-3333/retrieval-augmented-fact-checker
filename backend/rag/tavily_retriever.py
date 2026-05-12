@@ -7,6 +7,10 @@ from .vector_store import VectorStore
 load_dotenv()
 
 class TavilyRetriever:
+    """
+    Handles live web retrieval using the Tavily API.
+    Prioritizes trusted sources and indexes results for semantic search.
+    """
     def __init__(self):
         api_key = os.getenv("TAVILY_API_KEY")
         if api_key == "your_tavily_api_key_here" or not api_key:
