@@ -22,6 +22,7 @@ const ResultCard = ({ result }) => {
       case 'real': return 'var(--real)';
       case 'fake': return 'var(--fake)';
       case 'misleading': return 'var(--misleading)';
+      case 'unverified': return '#6b7280';
       default: return 'var(--foreground)';
     }
   };
