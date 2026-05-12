@@ -46,6 +46,10 @@ class AnalysisResponse(BaseModel):
 
 @app.post("/analyze", response_model=AnalysisResponse)
 async def analyze_news(request: NewsRequest):
+    """
+    Analyzes a news claim by retrieving live evidence and verifying it using AI.
+    Returns a verdict, confidence score, and supporting evidence.
+    """
     if not request.text.strip():
         raise HTTPException(status_code=400, detail="Text cannot be empty")
     
