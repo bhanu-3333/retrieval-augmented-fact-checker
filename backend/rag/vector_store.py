@@ -2,6 +2,10 @@ import faiss
 import numpy as np
 
 class VectorStore:
+    """
+    A lightweight wrapper around FAISS for semantic search.
+    Stores and retrieves text based on embedding similarity.
+    """
     def __init__(self, dimension):
         # Use Inner Product for Cosine Similarity
         self.index = faiss.IndexFlatIP(dimension)
