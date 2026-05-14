@@ -1,6 +1,12 @@
 import React from 'react';
 
 const ConfidenceMeter = ({ score, color }) => {
+  const getLabel = (s) => {
+    if (s >= 80) return "High";
+    if (s >= 50) return "Med";
+    return "Low";
+  };
+
   return (
     <div style={{ textAlign: 'center', position: 'relative' }}>
       <div style={{
@@ -26,8 +32,8 @@ const ConfidenceMeter = ({ score, color }) => {
           justifyContent: 'center',
           border: '1px solid rgba(255,255,255,0.05)'
         }}>
-          <span style={{ fontSize: '1.4rem', fontWeight: '800', color: '#fff' }}>{score}%</span>
-          <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.4)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Trust</span>
+          <span style={{ fontSize: '1.2rem', fontWeight: '800', color: '#fff' }}>{getLabel(score)}</span>
+          <span style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.4)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Confidence</span>
         </div>
       </div>
     </div>
@@ -35,4 +41,3 @@ const ConfidenceMeter = ({ score, color }) => {
 };
 
 export default ConfidenceMeter;
-
