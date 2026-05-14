@@ -5,21 +5,20 @@ import React, { useState, useEffect } from 'react';
 const LoadingState = () => {
   const [step, setStep] = useState(0);
   const steps = [
-    "Initializing neural handshake...",
-    "Querying global news clusters...",
+    "Searching trusted sources...",
     "Retrieving verification snippets...",
-    "Synthesizing RAG evidence...",
-    "Executing semantic reasoning...",
+    "Analyzing evidence...",
     "Detecting contradictory patterns...",
-    "Generating final intelligence report..."
+    "Generating final verdict..."
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setStep((prev) => (prev < steps.length - 1 ? prev + 1 : prev));
-    }, 2000);
+    }, 1200); // Faster transitions
     return () => clearInterval(interval);
   }, [steps.length]);
+
 
   return (
     <div style={{ textAlign: 'center', padding: '80px 20px', maxWidth: '700px', margin: '0 auto' }}>
