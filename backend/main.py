@@ -59,7 +59,6 @@ async def analyze_news(request: NewsRequest):
     
     # Check if Tavily is configured
     if not os.getenv("TAVILY_API_KEY") or os.getenv("TAVILY_API_KEY") == "your_tavily_api_key_here":
-         # Fallback to a mock response if API key is missing to avoid crash
          return {
             "verdict": "Configuration Missing",
             "confidence": 0,
@@ -69,12 +68,14 @@ async def analyze_news(request: NewsRequest):
         }
 
     try:
-        result = verifier.verify(cleaned)
+        # Now awaiting the async verify method
+        result = await verifier.verify(cleaned)
         print(f"Analysis completed in {time.time() - start_time:.2f} seconds")
         return result
     except Exception as e:
         print(f"Detailed Error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.get("/")
 async def root():
