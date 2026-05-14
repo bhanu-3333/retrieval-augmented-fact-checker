@@ -77,19 +77,32 @@ class OllamaVerifier:
             snippet = clean_snippet(r['metadata'].get('content', ''))
             evidence_context += f"[{source_name}] {title}: {snippet}\n\n"
         
-        # Optimization: More concise prompt for faster inference
-        prompt = f"""Verify this claim based ONLY on the evidence provided.
+        # Improved reasoning logic with semantic analysis
+        prompt = f"""You are a Fact-Checking Intelligence Agent. Analyze the claim using ONLY the provided evidence.
+
 CLAIM: {text}
+
 EVIDENCE:
 {evidence_context}
 
-Return JSON:
+VERDICT RULES:
+- REAL: Evidence directly confirms the exact claim.
+- MISLEADING: Evidence is partially related, or the claim exaggerates/distorts real info.
+- FAKE: Evidence contradicts the claim, OR no trusted source confirms a major/specific claim discussed in sources, OR fabricated promises/schemes are detected.
+- UNVERIFIED: Absolutely no meaningful or related evidence exists.
+
+SEMANTIC REASONING:
+- If sources discuss the core topic (e.g., a party manifesto) but DO NOT mention the specific claim (e.g., a "free" promise), the verdict should be FAKE or MISLEADING, not Unverified.
+- Use semantic context: lack of confirmation for a major announcement in trusted media is evidence of fabrication.
+
+Return STRICT JSON:
 {{
     "verdict": "Real" | "Fake" | "Misleading" | "Unverified",
     "confidence": 0-100,
-    "explanation": "Brief reasoning (2 sentences max).",
-    "highlighted_claims": ["sub-claim"]
+    "explanation": "Clear, semantic explanation of why the evidence confirms or fails to confirm the claim.",
+    "highlighted_claims": ["specific claim analyzed"]
 }}"""
+
         
         url = self.ollama_url.replace("localhost", "127.0.0.1")
         if not url.endswith("/api/generate"):
