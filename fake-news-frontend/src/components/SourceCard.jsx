@@ -7,13 +7,27 @@ const SourceCard = ({ source }) => {
   const snippet = source.snippet || source.summary || '';
   const trust = source.trust_score || 0;
 
-  const getTrustLabel = (score) => {
-    if (score >= 90) return { text: 'Highly Trusted', color: '#2d5a27' };
-    if (score >= 70) return { text: 'Moderate', color: '#b8860b' };
-    return { text: 'Low Trust', color: '#8b0000' };
+  const getSourceBadge = (source) => {
+    const url = (source.url || '').toLowerCase();
+    const name = (source.source || '').toLowerCase();
+    const score = source.trust_score || 0;
+
+    if (url.includes('.gov') || name.includes('who') || name.includes('united nations') || name.includes('nasa')) {
+      return { text: 'Official Source', color: '#1a365d' };
+    }
+    if (name.includes('snopes') || name.includes('factcheck') || name.includes('politifact') || name.includes('alt news')) {
+      return { text: 'Fact Check', color: '#166534' };
+    }
+    if (name.includes('reuters') || name.includes('ap news') || name.includes('bbc') || name.includes('times') || name.includes('guardian')) {
+      return { text: 'News Article', color: '#374151' };
+    }
+    if (score >= 80) {
+      return { text: 'Trusted Source', color: '#2d5a27' };
+    }
+    return { text: 'Reference', color: '#4b5563' };
   };
 
-  const trustInfo = getTrustLabel(trust);
+  const badge = getSourceBadge(source);
 
   return (
     <div className="glass-card animate-fade-in" style={{
@@ -43,16 +57,14 @@ const SourceCard = ({ source }) => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span style={{ 
                 fontSize: '0.6rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.1em',
-                color: trustInfo.color, background: `${trustInfo.color}10`, padding: '2px 6px', borderRadius: '2px'
+                color: badge.color, background: `${badge.color}10`, padding: '2px 8px', borderRadius: '4px'
               }}>
-                {trustInfo.text}
-              </span>
-              <span style={{ fontSize: '0.65rem', color: 'rgba(0,0,0,0.3)', fontWeight: '600' }}>
-                {trust}%
+                {badge.text}
               </span>
             </div>
           </div>
         </div>
+
 
         {source.url && (
           <a href={source.url} target="_blank" rel="noopener noreferrer" style={{
