@@ -1,0 +1,27 @@
+services:
+  # Backend Service
+  - type: web
+    name: fakescan-api
+    env: docker
+    dockerContext: backend
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: TAVILY_API_KEY
+        sync: false # User must set this in Render UI
+      - key: OLLAMA_URL
+        value: "http://127.0.0.1:11434/api/generate" # Default, will use heuristic fallback if not found
+
+  # Frontend Service
+  - type: web
+    name: fakescan-frontend
+    env: node
+    buildCommand: "cd fake-news-frontend && npm install && npm run build"
+    startCommand: "cd fake-news-frontend && npm run start"
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          name: fakescan-api
+          type: web
+          property: url
