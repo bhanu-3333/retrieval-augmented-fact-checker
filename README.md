@@ -64,8 +64,14 @@ npm run dev
 ## 📂 Folder Structure
 
 ```text
-backend/                # FastAPI logic, RAG engine, and AI reasoning
-fake_news_frontend/     # Next.js UI components and API integration
+backend/                # FastAPI logic & RAG engine
+├── rag/                # Retrieval & Verification modules
+├── utils/              # Data cleaning & processing
+└── main.py             # API entry point
+fake-news-frontend/     # Next.js UI
+├── src/components/     # Reusable UI components
+├── src/services/       # API interaction layer
+└── src/app/            # Next.js pages & layouts
 ```
 
 ---
