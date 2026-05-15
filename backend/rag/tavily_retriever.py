@@ -13,6 +13,10 @@ class TavilyRetriever:
     Optimized for speed: limits results and uses async processing.
     """
     def __init__(self):
+        """
+        Initializes the Tavily client and the embedding engine.
+        Uses TAVILY_API_KEY from environment variables.
+        """
         api_key = os.getenv("TAVILY_API_KEY")
         if api_key == "your_tavily_api_key_here" or not api_key:
             print("WARNING: Tavily API key not set. Live search will fail.")
