@@ -78,7 +78,8 @@ async def analyze_news(request: NewsRequest):
 
 
 @app.get("/")
-async def root():
+async def root() -> dict:
+    """Health check endpoint to verify API status."""
     return {"status": "online", "message": "FakeScan AI Live RAG API is running"}
 
 if __name__ == "__main__":
